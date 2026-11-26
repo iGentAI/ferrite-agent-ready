@@ -1,0 +1,47 @@
+# Expected conformance failures for the agent-ready example apps.
+#
+# Consumed by agent-conformance/agent-conformance.mjs, which enforces it
+# in BOTH directions — the discipline an MCP conformance baseline
+# holds its runner to:
+#
+#   fails + listed    -> exit 0, an expected failure
+#   fails + unlisted  -> exit 1, a REGRESSION
+#   passes + listed   -> exit 1, a STALE entry
+#
+# So an entry cannot quietly outlive its reason: the day a scenario starts
+# passing, every scan fails until somebody deletes the line. That is the
+# property worth having, and it is why any entry added here must carry a
+# comment saying why it is here.
+#
+# Entries live under a `<name>:` section (the label passed to --name) and name
+# either a whole scenario or a single check:
+#
+#   some-app:
+#     - mcp-protocol-errors                     # every failing check in the scenario excused
+#     - readable-artefacts:llms-full-companion  # exactly one check excused
+#
+# Two rules keep this file honest rather than decorative:
+#
+#   * 'info' checks are NEVER baselined. Info means "does not apply to this
+#     origin" (x402 on the docs site, tool shape with zero tools) or "not
+#     evidenced from outside" — there is no failure to excuse, and an entry
+#     naming one is reported as STALE.
+#
+#   * an EMPTY section is valid and meaningful: it is the section a fully
+#     conforming app has, and it still enforces — any failure under that name
+#     is a regression. Deleting a section is weaker than leaving it empty.
+#
+# All three example apps currently pass every applicable check (their
+# inapplicable surfaces — x402 on the docs site, tools on a content-only
+# catalog — answer info, which is not baselined). See
+# benchmarks/agent-readiness/ for the sibling scorecards. All three sections
+# are therefore deliberately empty.
+
+fe-docs-site:
+  # (no expected failures)
+
+fe-taskboard:
+  # (no expected failures)
+
+quotes-api:
+  # (no expected failures)
